@@ -1,0 +1,22 @@
+export BUILDDIR=$(COMMON_BUILDDIR)/VM/lib
+export BINDIR=$(COMMON_BINDIR)/VM/lib
+
+OBJS=$(BINDIR)/libcore.bml \
+	$(BINDIR)/libplatform.bml \
+	$(BINDIR)/libaudio.bml \
+	$(BINDIR)/libnet.bml \
+	$(BINDIR)/libgui.bml \
+	$(BINDIR)/lib2d.bml \
+	$(BINDIR)/lib3d.bml
+
+all: dirs $(OBJS)
+
+dirs:
+	$(MKDIR) $(BUILDDIR) $(BINDIR)
+	@$(foreach subdir, $(OBJS), $(MKDIR) $(BUILDDIR)/$(shell basename -s .bml $(subdir)); )
+
+$(BINDIR)/libcore.bml: $(BUILDDIR)/libcore/libcore.bmo
+	$(BMC) $(BMFLAGS) $^ -o $@
+
+$(BUILDDIR)/%.bmo: %.bm
+	$(BMC) $(BMFLAGS) -c $^ -o $@

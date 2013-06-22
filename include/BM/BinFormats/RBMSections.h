@@ -1,0 +1,14 @@
+#ifndef RBMSECTIONS_H
+#define RBMSECTIONS_H
+
+#include <stdint.h>
+
+#define RBM_SECTION_ATTR_READ		1
+#define RBM_SECTION_ATTR_WRITE		2
+#define RBM_SECTION_ATTR_EXEC		4
+
+#define RBM_SECTION_TYPE_DEFAULT	0
+#define RBM_SECTION_TYPE_IMPORT		1
+#define RBM_SECTION_TYPE_EXPORT		2
+
+#endif
